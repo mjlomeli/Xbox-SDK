@@ -173,19 +173,27 @@ function upload_to_pypi () {
   then
     sudo rm -r dist &>/dev/null
     sudo rm -r "src/$3.egg-info" &>/dev/null
+    _name=$(echo "$3" | tr - _)
+    sudo rm -r "src/$_name.egg-info" &>/dev/null
     python3 -m build
     python3 -m twine upload --repository pypi dist/* -u"__token__" -p"$PYPI"
     sudo rm -r dist &>/dev/null
-    sudo rm -r "src/$3.egg-info" &>/dev/null
+    rm -r "src/$3.egg-info" &>/dev/null;
+    _name=$(echo "$3" | tr - _)
+    sudo rm -r "src/$_name.egg-info" &>/dev/null
   elif [[ "$OSTYPE" == "msys" ]]
   then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
     rm -r dist &>/dev/null
     rm -r "src/$3.egg-info" &>/dev/null
+    _name=$(echo "$3" | tr - _)
+    rm -r "src/$_name.egg-info" &>/dev/null
     python -m build
     python -m twine upload --repository pypi dist/* -u"__token__" -p"$PYPI"
     rm -r dist &>/dev/null
-    rm -r "src/$3.egg-info" &>/dev/null
+    rm -r "src/$3.egg-info" &>/dev/null;
+    _name=$(echo "$3" | tr - _)
+    rm -r "src/$_name.egg-info" &>/dev/null;
   else
     printf "Haven't created a command for $OSTYPE"
     return 1

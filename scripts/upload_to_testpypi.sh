@@ -174,6 +174,8 @@ function upload_to_test_pypi () {
     # POSIX compatibility layer and Linux environment emulation for Windows
     sudo rm -r dist &>/dev/null
     sudo rm -r "src/$3.egg-info" &>/dev/null
+    _name=$(echo "$3" | tr - _)
+    sudo rm -r "src/$_name.egg-info" &>/dev/null
     python3 -m build
     python3 -m twine upload --repository testpypi dist/* -u"__token__" -p"$TEST_PYPI"
     sudo rm -r dist &>/dev/null
@@ -187,6 +189,8 @@ function upload_to_test_pypi () {
     python -m twine upload --repository testpypi dist/* -u"__token__" -p"$TEST_PYPI"
     rm -r dist &>/dev/null
     rm -r "src/$3.egg-info" &>/dev/null
+    _name=$(echo "$3" | tr - _)
+    rm -r "src/$_name.egg-info" &>/dev/null
   else
     printf "Haven't created a command for $OSTYPE"
     return 1
