@@ -134,6 +134,5 @@ dmypy.json
 /dist
 .tox
 
-**/Xbox-Live.spec
 /executable
 *.spec
