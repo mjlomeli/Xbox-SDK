@@ -35,7 +35,7 @@ def assert_success(response: Response):
     assert_response_is_ok(response)
     assert_response_is_json(response)
     #assert_response_is_xapi_data(response)
-    data = response.json()
+    #data = response.json()
 
     #if data['status'] != 'success':
     #    raise requests.RequestException(f"[XAPI Error]: {data['message']} ({response.url})")
