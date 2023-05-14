@@ -25,7 +25,7 @@ def assert_response_is_json(response: Response):
     try:
         response.json()
     except JSONDecodeError as e:
-        message = f"Could not parse into JSON format {response.url}."
+        message = f"Could not parse into JSON format {response.url}.\n"
         message += f"{response.text}\n"
         raise JSONDecodeError(f"{message}\n{e}")
 
