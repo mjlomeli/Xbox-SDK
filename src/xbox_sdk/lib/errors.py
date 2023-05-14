@@ -1,5 +1,6 @@
 import requests
 from requests import Response
+from requests.exceptions import JSONDecodeError
 
 
 class AuthorizationError(Exception):
@@ -21,6 +22,12 @@ def assert_response_is_json(response: Response):
     headers = response.headers
     if 'Content-Type' not in headers and 'application/json' not in headers['Content-Type']:
         raise requests.RequestException(f"[JSON Error]: The response did not reply in JSON format ({response.url})")
+    try:
+        response.json()
+    except JSONDecodeError as e:
+        message = f"Could not parse into JSON format {response.url}."
+        message += f"{response.text}\n"
+        raise JSONDecodeError(f"{message}\n{e}")
 
 
 def assert_response_is_xapi_data(response: Response):
