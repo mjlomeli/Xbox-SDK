@@ -1,11 +1,10 @@
 import json
-from xbox_sdk.client import Client
 from pathlib import Path
 from time import sleep
 
 
 class User:
-    def __init__(self, gamer_tag='ensue9805', xuid='2535434466564225', client=Client()):
+    def __init__(self, gamer_tag='ensue9805', xuid='2535434466564225', client=None):
         assert isinstance(gamer_tag, str)
         assert isinstance(xuid, str)
         self.gamer_tag = gamer_tag

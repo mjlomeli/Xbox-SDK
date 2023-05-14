@@ -1,5 +1,6 @@
 from time import sleep
 
+
 class Timer:
     def __init__(self, client):
         self.__client = client
